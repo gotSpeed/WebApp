@@ -1,0 +1,48 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static '/css/auth-template.css' %}">
+    <link rel="stylesheet" href="{% static '/css/petition-creation.css' %}">
+    <script src="https://kit.fontawesome.com/7bbe8a264e.js" crossorigin="anonymous"></script>
+
+    <title>Create voting</title>
+</head>
+<body>
+<div class="header">
+    <a class="btn-go__back" href="{% url 'user_page' user_id %}"><i class="fas fa-arrow-left"></i>To profile page</a>
+</div>
+<div class="bordered__container">
+	<div class="create__content-block">
+		<form class="create__content-form" method="post">
+			{% csrf_token %}
+			<h1>New voting</h1>
+			<p>Heading:</p>
+			<div class="input__decoration">
+				<input type="text" name="name" maxlength="200" placeholder="Voting">
+			</div>
+			<p>Options (place every option on a new line):</p>
+			<div class="input__decoration textarea__decoration">
+				<textarea name="options" rows="8" placeholder="First...&#13;&#10;Second...&#13;&#10;Third..." maxlength="1000"></textarea>
+			</div>
+			<p>Description:</p>
+			<div class="input__decoration textarea__decoration">
+				<textarea name="description" rows="8" placeholder="My voting..." maxlength="1000"></textarea>
+			</div>
+
+			{% for mes in messages %}
+				<div class="error__message__block">
+	            {{ mes }}
+				</div>
+	        {% endfor %}
+			
+			<button class="create__content-form-btn" type="submit">Publish</button>
+		</form>
+	</div>
+</div>
+
+</body>
+</html>

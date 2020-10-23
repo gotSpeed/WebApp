@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+
+<html dir="ltr" lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/main-template.css">
+
+    @RenderSectionAsync("Links", required: false).Result
+    @RenderSectionAsync("ScriptsHighPriority", required: false).Result
+    @RenderSection("Styles", required: false)
+
+    <title>@ViewBag.Title</title>
+</head>
+
+<body>
+
+    <header>
+        <div class="header-logo">
+            <img src="~/Images/site-logo.png" alt="Logo">
+        </div>
+
+        <ul class="nav-bar">
+            <li class="nav-bar__item"><a id="main_pg" href="#">Main page</a></li>
+            <li class="nav-bar__item"><a id="voting_pg" href="#">Available voting</a></li>
+            <li class="nav-bar__item"><a id="contacts_pg" href="#">Contacts</a></li>
+        </ul>
+
+        <div class="empty"></div>
+
+        <div class="search-bar">
+            <form class="search-bar__decoration" method="post">
+                <input type="text" name="search_query" placeholder="Search...">
+            </form>
+        </div>
+
+        <div class="login-bar">
+            @*<a id="signed-in__user__name"
+               href="{% url 'user_page' request.user.id %}">{{ request.user.username }}</a>
+            <span class="login-bar__delimiter">|</span>
+            <a href="{% url 'sign-out' %}">Sign out</a>*@
+            <a href="#">Sign in</a>
+        </div>
+    </header>
+
+    <div>
+        @RenderBody()
+    </div>
+
+    @RenderSectionAsync("ScriptsLowPriority", required: false).Result
+
+</body>
+
+</html>

@@ -1,0 +1,147 @@
+section {
+	margin: 0;
+	padding: 0;
+}
+
+/* Contacts section */
+.section-contacts {
+	background-color: #354a5f;
+}
+
+/* Bordered container */
+.bordered__container {
+	margin: 0;
+	padding:  50px 100px 80px;
+}
+
+/* Contacts */
+.contacts {
+	margin: 0 auto;
+
+	color: white;
+	text-align: center;
+}
+
+.contacts ul {
+	padding: 0;
+	margin: 0 auto;
+
+	width: 300px;
+
+	list-style-type: none;
+}
+
+.contacts ul li {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.contact__by-name {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.contact__by-content {
+	text-decoration: none;
+	color: white;
+
+	transition: color 0.2s linear 0.2s;
+}
+
+.contact__by-content:hover {
+	color: #e44a4a;
+}
+
+/* Message block */
+.message {
+	text-align: center;
+	color: #354a5f;
+}
+
+.message__block {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 50px auto;
+	padding: 30px;
+
+	width: 70%;
+
+	background-color: #e44a4a;
+	border-radius: 25px;
+
+}
+
+.message__block-wrap {
+	display: flex;
+	margin: 0;
+	padding: 0;
+}
+
+.message__block-avatar {
+	display: inline-block;
+	margin-right: 50px;
+
+	width: 150px;
+
+	border-radius: 15px;
+}
+
+.message__block-form {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-end;
+}
+
+.message__block-form-message__decoration {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 5px 10px;
+	margin-bottom: 10px;
+
+	background-color: #EDEDED;
+	border-radius: 15px;
+}
+
+.message__block-form-message {
+	line-height: 1.5;
+	background-color: #EDEDED;
+	outline: none;
+	overflow: auto;
+	resize: none;
+	word-wrap: normal;
+	border: none;
+}
+
+.message__block-form-btn {
+	display: block;
+	margin: 0 auto;
+
+	width: 200px;
+
+	background-color: transparent;
+	border-radius: 5px;
+	border: 2px solid white;
+	outline: none;
+	cursor: pointer;
+
+	color: white;
+	font-size: 1em;
+}
+
+.message__block-form-btn:hover {
+	background-color: #354a5f;
+}
+
+.message__block-info {
+	margin: 30px auto 0;
+	padding: 10px 5px;
+	flex-basis: 100%;
+
+	color: white;
+	text-align: center;
+	background-color: #354a5f;
+	border: none;
+	border-radius: 25px;
+}

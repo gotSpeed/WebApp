@@ -1,16 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 
 namespace WebApp.Domain.Core {
+
 	public class Post {
-		public ushort Id { get; set; }
+
+		[Key]
+		public uint Id { get; set; }
 		public string Header { get; set; }
 		public string ShortDescription { get; set; }
 		public string Description { get; set; }
 		public DateTime PublicationDate { get; set; }
 		public User Author { get; set; }
 		public uint VotersAmount { get; set; }
-		public IEnumerable<User> Voters { get; set; }
+		public List<uint> VotersId { get; set; }
+
 	}
+
 }

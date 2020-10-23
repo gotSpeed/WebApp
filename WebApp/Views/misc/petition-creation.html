@@ -1,0 +1,52 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static '/css/auth-template.css' %}">
+    <link rel="stylesheet" href="{% static '/css/petition-creation.css' %}">
+    <script src="https://kit.fontawesome.com/7bbe8a264e.js" crossorigin="anonymous"></script>
+
+    <title>Create petition</title>
+</head>
+<body>
+<div class="header">
+    <a class="btn-go__back" href="{% url 'user_page' user_id %}"><i class="fas fa-arrow-left"></i>To profile page</a>
+</div>
+<div class="bordered__container">
+	<div class="create__content-block">
+		<form class="create__content-form" method="post">
+			{% csrf_token %}
+			<h1>New petition</h1>
+			<p>Heading:</p>
+			<div class="input__decoration">
+				<input type="text" name="name" maxlength="200" placeholder="Petition">
+			</div>
+			<p>Total votes goal:</p>
+			<div class="input__decoration">
+				<input type="number" name="totalGoal" placeholder="5000">
+			</div>
+			<p>Start votes goal (unnecessary):</p>
+			<div class="input__decoration">
+				<input type="number" name="nextGoal" value="200">
+			</div>
+			<p>Description:</p>
+			<div class="input__decoration textarea__decoration">
+				<textarea name="description" rows="8" placeholder="My petition..." maxlength="1000"></textarea>
+			</div>
+
+			{% for mes in messages %}
+				<div class="error__message__block">
+				{{ mes }}
+				</div>
+			{% endfor %}
+
+			<button class="create__content-form-btn" type="submit">Publish</button>
+		</form>
+	</div>
+</div>
+
+</body>
+</html>

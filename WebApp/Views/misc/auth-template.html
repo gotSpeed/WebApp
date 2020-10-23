@@ -1,0 +1,38 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static '/css/auth-template.css' %}">
+    <script src="https://kit.fontawesome.com/7bbe8a264e.js" crossorigin="anonymous"></script>
+
+    {% block css_import %}{% endblock %}
+
+    <title>Authentication</title>
+</head>
+<body>
+<div class="header">
+    <a class="btn-go__back" href="{% url pr_pg %}"><i class="fas fa-arrow-left"></i>Back</a>
+</div>
+
+<section class="sign-up__block">
+    <form class="sign-up__block-form" action="" method="post">
+        {% csrf_token %}
+        <h1>{% block heading %}{% endblock %}</h1>
+
+        {% block fields %}{% endblock %}
+
+		{% for mes in messages %}
+			<div class="error__message__block">
+            {{ mes }}
+			</div>
+        {% endfor %}
+
+        <button class="btn-accept__signing-up" type="submit">{% block btn_name %}{% endblock %}</button>
+        <a class="change__auth__type" href="{% url alternative pr_pg %}">{% block alternative %}{% endblock %}</a>
+    </form>
+</section>
+</body>
+</html>

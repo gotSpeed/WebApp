@@ -1,0 +1,160 @@
+h1 {
+	margin-bottom: 60px;
+
+	width: 100%;
+
+	color: #354a5f;
+	text-align: center;
+}
+
+/* Bordered container */
+.bordered__container {
+	margin: 0;
+	padding:  70px 170px 120px;
+}
+
+/* Wallpaper */
+.wallpaper {
+	margin: 0;
+	padding: 0;
+
+	width: 100%;
+
+	color: white;
+	text-align: center;
+	background-color: #354a5f;
+}
+
+.wallpaper h1 {
+	color: white;
+}
+
+.wallpaper__heading,
+.popular__heading {
+	display: block;
+	position: relative;
+	margin: 0 auto 80px;
+}
+
+.wallpaper__heading::after,
+.popular__heading::after {
+	content: "";
+
+	display: block;
+	position: absolute;
+	bottom: -39px;
+	left: 50%;
+
+	transform: translateX(-50%);
+
+	width: 50px;
+	height: 2px;
+
+	background-color: white;
+}
+
+.wallpaper__description {
+	margin: 0 auto 45px;
+}
+
+.wallpaper__image {
+	display: block;
+	margin: 0 auto;
+
+	width: 700px;
+
+	border-radius: 2px;
+}
+
+.wallpaper__scroller {
+	position: relative;
+	margin: 0 auto;
+
+	width: 700px;
+}
+
+.wallpaper__scroller form {
+	position: absolute;
+	margin: 0 auto;
+	padding: 0;
+	left: 50%;
+	top: 50%;
+
+	transform: translate(-50%, -50%);
+}
+
+.btn-wallpaper {
+	margin: 0 auto;
+	padding: 5px 10px;
+
+	width: 150px;
+
+	color: white;
+	font-size: 22px;
+	border: 1px solid white;
+	border-radius: 5px;
+	background-color: transparent;
+	outline: none;
+	cursor: pointer;
+
+	transition: background-color 0.2s linear 0;
+}
+
+.btn-wallpaper:hover {
+	background-color: #e44a4a;
+}
+
+/* Most popular votings */
+.popular {
+	margin: 0;
+	padding: 0;
+
+	width: 100%;
+
+	color: #354a5f;
+	text-align: center;
+	background-color: white;
+}
+
+.popular-grid {
+	display: flex;
+	flex-wrap: wrap;
+
+	align-items: center;
+	justify-content: space-between;
+}
+
+.popular-grid img {
+	display: block;
+	margin: 0 0 80px;
+
+	width: 45%;
+}
+
+/* NOTE:
+.popular__heading,
+.popular__heading::after
+are defined in Wallpaper section */
+
+.popular__heading::after {
+	height: 3px;
+
+	background-color: #354a5f;
+}
+
+.popular__description {
+	margin: 0 auto 60px;
+}
+
+.publications-grid {
+	margin-bottom: 50px;
+}
+
+.publications__content {
+	color: #354a5f;
+	text-align: left;
+}
+
+.publications__content hr {
+	background-color: #354a5f;
+}

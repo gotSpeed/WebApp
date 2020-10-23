@@ -1,0 +1,17 @@
+{% extends 'auth-template.html' %}
+
+{% block heading %}Sign in{% endblock %}
+
+{% block fields %}
+    <p>Email:</p>
+    <div class="input__field-decorator">
+        <input type="text" name="email" value="" placeholder="Enter your email...">
+    </div>
+    <p>Password:</p>
+    <div class="input__field-decorator">
+        <input type="password" name="password" value="" placeholder="Enter password...">
+    </div>
+{% endblock %}
+
+{% block btn_name %}Sign in{% endblock %}
+{% block alternative %}If you got no account, you can register right now{% endblock %}

@@ -1,0 +1,85 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="{% static '/css/publications.css' %}">
+		<link rel="stylesheet" href="{% static '/css/search-results.css' %}">
+		<script src="https://kit.fontawesome.com/7bbe8a264e.js" crossorigin="anonymous"></script>
+		<title>Search results</title>
+	</head>
+	<body>
+		<div class="header"> <!-- Header section -->
+		    <a class="btn-go__back" href="{% url pr_pg %}"><i class="fas fa-arrow-left"></i>Back</a>
+		</div>
+
+		<section class="publications">
+	        <div class="bordered__container">
+	            <h1>Petitions</h1>
+	            <div class="publications-grid">
+	                {% for publication in petitions %}
+	                    <a class="publications__content" href="{% url 'concrete_petition_page' pr_pg publication.id %}">
+	                        <div class="publications__content-name">
+	                            {{ publication.name }}
+	                        </div>
+	                        <hr>
+
+	                        {% if user_id == publication.author.id %}
+	                            Author:<span class="highlight">{{ publication.author }}</span>
+	                        {% else %}
+	                            Author:<span>{{ publication.author }}</span>
+	                        {% endif %}
+
+	                        <br>
+
+							{% if publication.peopleVoted >= publication.totalGoal %}
+	                            People signed:<span class="highlight">{{ publication.peopleVoted }}</span>
+	                        {% else %}
+	                            People signed:<span>{{ publication.peopleVoted }}</span>
+	                        {% endif %}
+
+	                        <br>
+							Next goal:<span>{{ publication.nextGoal }}</span>
+	                        <br>
+	                        Total goal:<span>{{ publication.totalGoal }}</span>
+	                        <br>
+	                        <hr>
+	                        <div class="publications__content-descriprion">
+	                            {{ publication.shortDescription }}
+	                        </div>
+	                    </a>
+	                {% endfor %}
+	            </div>
+			</div>
+			<hr>
+			<div class="bordered__container">
+				<h1>Votings</h1>
+				<div class="publications-grid">
+					{% for publication in votings %}
+	                    <a class="publications__content" href="{% url 'concrete_voting_page' pr_pg publication.id %}">
+	                        <div class="publications__content-name">
+	                            {{ publication.name }}
+	                        </div>
+	                        <hr>
+	                        {% if user_id == publication.author.id %}
+	                            Author:<span  class="highlight">{{ publication.author }}</span>
+	                        {% else %}
+	                            Author:<span>{{ publication.author }}</span>
+	                        {% endif %}
+	                        <br>
+	                        People signed:<span>{{ publication.peopleVoted }}</span>
+	                        <br>
+	                        <hr>
+	                        <div class="publications__content-descriprion">
+	                            {{ publication.shortDescription }}
+	                        </div>
+	                    </a>
+	                {% endfor %}
+				</div>
+	        </div>
+	    </section>
+	</body>
+</html>

@@ -1,0 +1,25 @@
+{% extends 'auth-template.html' %}
+
+{% block heading %}Registration{% endblock %}
+
+{% block fields %}
+    <p>{{ form.username.label }}:</p>
+    <div class="input__field-decorator">
+        {{ form.username }}
+    </div>
+    <p>{{ form.email.label }}:</p>
+    <div class="input__field-decorator">
+        {{ form.email }}
+    </div>
+    <p>{{ form.password1.label }}:</p>
+    <div class="input__field-decorator">
+        {{ form.password1 }}
+    </div>
+    <p>{{ form.password2.label }}:</p>
+    <div class="input__field-decorator">
+        {{ form.password2 }}
+    </div>
+{% endblock %}
+
+{% block btn_name %}Accept{% endblock %}
+{% block alternative %}Click here if you already got an account{% endblock %}

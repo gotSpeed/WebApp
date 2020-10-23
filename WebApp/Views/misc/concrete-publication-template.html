@@ -1,0 +1,38 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static '/css/auth-template.css' %}">
+    <link rel="stylesheet" href="{% static '/css/concrete-publication-template.css' %}">
+    <script src="https://kit.fontawesome.com/7bbe8a264e.js" crossorigin="anonymous"></script>
+    <title>Publication</title>
+
+	{% block style %}{% endblock %}
+
+</head>
+<body>
+<div class="header">
+    <a class="btn-go__back" href="{% url pr_pg %}"><i class="fas fa-arrow-left"></i>Back</a>
+</div>
+
+<section class="concrete-publication">
+	<div class="bordered__container">
+
+		{% block guestView %}{% endblock %}
+
+		{% if is_author %}
+			<div class="delete__section">
+				<form class="delete__button-form" method="post">
+					{% csrf_token %}
+					<button class="delete__button" type="submit" name="delete_pub">Delete publication</button>
+				</form>
+			</div>
+		{% endif %}
+		
+	</div>
+</section>
+</body>
+</html>

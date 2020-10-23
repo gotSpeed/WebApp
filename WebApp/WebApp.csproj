@@ -5,8 +5,44 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Static\css\" />
-    <Folder Include="Static\html\" />
+    <None Remove="Static\css\auth-template.css" />
+    <None Remove="Static\css\concrete-publication-template.css" />
+    <None Remove="Static\css\concrete-voting.css" />
+    <None Remove="Static\css\contacts.css" />
+    <None Remove="Static\css\home.css" />
+    <None Remove="Static\css\main-template.css" />
+    <None Remove="Static\css\petition-creation.css" />
+    <None Remove="Static\css\publications.css" />
+    <None Remove="Static\css\search-results.css" />
+    <None Remove="Static\css\user.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Static\css\auth-template.css" />
+    <Content Include="Static\css\concrete-publication-template.css" />
+    <Content Include="Static\css\concrete-voting.css" />
+    <Content Include="Static\css\contacts.css" />
+    <Content Include="Static\css\home.css" />
+    <Content Include="Static\css\main-template.css" />
+    <Content Include="Static\css\petition-creation.css" />
+    <Content Include="Static\css\publications.css" />
+    <Content Include="Static\css\search-results.css" />
+    <Content Include="Static\css\user.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WebApp.DataAccess\WebApp.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>

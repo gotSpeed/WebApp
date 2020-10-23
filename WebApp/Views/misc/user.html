@@ -1,0 +1,142 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static '/css/auth-template.css' %}">
+    <link rel="stylesheet" href="{% static '/css/user.css' %}">
+    <script src="https://kit.fontawesome.com/7bbe8a264e.js" crossorigin="anonymous"></script>
+    <title>User profile</title>
+</head>
+<body>
+<div class="header">
+    <a class="btn-go__back" href="{% url 'home_page' %}"><i class="fas fa-arrow-left"></i>To main page</a>
+</div>
+
+<section class="user__profile"> <!-- Profile customization -->
+    <div class="bordered__container">
+        <h1>Your profile info</h1>
+        <ul class="user__info">
+            <li>
+                <div class="info__list-item">
+                    <p class="info__list-item-name">Username:<span>{{ request.user.username }}</span></p>
+                    <form class="info__list-item-form" method="post">
+						{% csrf_token %}
+                        <div class="input__decoration">
+                            <input type="text" name="username_form" placeholder="You can change your username here...">
+                        </div>
+                        <button type="submit" name="accept"><i class="fas fa-check"></i></button>
+						<button type="" name="cancel"><i class="fas fa-times"></i></button>
+                    </form>
+                </div>
+            </li>
+            <li>
+                <div class="info__list-item">
+                    <p class="info__list-item-name">Email:<span>{{ request.user.email }}</span></p>
+                    <form class="info__list-item-form" method="post">
+						{% csrf_token %}
+                        <div class="input__decoration">
+                            <input type="text" name="email_form" placeholder="You can change your email here...">
+                        </div>
+						<button type="submit" name="accept"><i class="fas fa-check"></i></button>
+						<button type="" name="cancel"><i class="fas fa-times"></i></button>
+                    </form>
+                </div>
+            </li>
+            <li>
+                <div class="info__list-item">
+                    <p class="info__list-item-name">First name:<span>{{ request.user.first_name }}</span></p>
+                    <form class="info__list-item-form" method="post">
+						{% csrf_token %}
+                        <div class="input__decoration">
+                            <input type="text" name="first_name_form" placeholder="You can change your first name here...">
+                        </div>
+						<button type="submit" name="accept"><i class="fas fa-check"></i></button>
+						<button type="" name="cancel"><i class="fas fa-times"></i></button>
+                    </form>
+                </div>
+            </li>
+            <li>
+                <div class="info__list-item">
+                    <p class="info__list-item-name">Last name:<span>{{ request.user.last_name }}</span></p>
+                    <form class="info__list-item-form" method="post">
+						{% csrf_token %}
+                        <div class="input__decoration">
+                            <input type="text" name="last_name_form"
+                                   placeholder="You can change your last name here...">
+                        </div>
+						<button type="submit" name="accept"><i class="fas fa-check"></i></button>
+						<button type="" name="cancel"><i class="fas fa-times"></i></button>
+                    </form>
+                </div>
+            </li>
+            <li>
+                <div class="info__list-item">
+                    <p class="info__list-item-name">Password:</p>
+                    <form class="info__list-item-form" method="post">
+						{% csrf_token %}
+                        <div class="input__decoration">
+                            <input type="text" name="password_form" placeholder="You can change your password here...">
+                        </div>
+						<button type="submit" name="accept"><i class="fas fa-check"></i></button>
+						<button type="" name="cancel"><i class="fas fa-times"></i></button>
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<hr>
+
+<section class="user__content"> <!-- Publications management -->
+	<div class="bordered__container">
+		<h1>Your votings and petitions</h1>
+		<div class="create__content__buttons">
+			<a href="{% url 'create-voting_page' user_id %}">Create voting/poll</a>
+			<a href="{% url 'create-petition_page' user_id %}">Create petition</a>
+		</div>
+
+		<div class="user__content__block">
+			{% for publication in petitions %}
+				<a class="user__content-publication" href="{% url 'concrete_petition_page' alt_pr_pg publication.id %}">
+					<div class="user__content-publication-name">
+						{{ publication.name }}
+					</div>
+					<hr>
+                    Author: <span class="this__author">{{ publication.author }}</span>
+					<br>
+                    People signed: {{ publication.peopleVoted }}
+					<br>
+					Total goal: {{ publication.totalGoal }}
+					<br>
+					<hr>
+					<div class="user__content-publication-descriprion">
+						{{ publication.shortDescription }}
+					</div>
+				</a>
+			{% endfor %}
+			{% for publication in votings %}
+				<a class="user__content-publication" href="{% url 'concrete_voting_page' alt_pr_pg publication.id %}">
+					<div class="user__content-publication-name">
+						{{ publication.name }}
+					</div>
+                    <hr>
+                    Author: <span class="this__author">{{ publication.author }}</span>
+					<br>
+                    People signed: {{ publication.peopleVoted }}
+					<br>
+					<hr>
+					<div class="user__content-publication-descriprion">
+						{{ publication.shortDescription }}
+					</div>
+				</a>
+			{% endfor %}
+		</div>
+	</div>
+</section>
+
+</body>
+</html>

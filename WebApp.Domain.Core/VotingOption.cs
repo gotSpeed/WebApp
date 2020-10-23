@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 
 namespace WebApp.Domain.Core {
+
 	public class VotingOption {
-		public ushort Id { get; set; }
-		public string Name { get; set; }
+
+		[Key]
+		public uint Id { get; set; }
+		public string Content { get; set; }
 		public uint VotersAmount { get; set; }
-		public IEnumerable<User> Voters { get; set; }
+		public List<uint> VotersId { get; set; }
+
 	}
+
 }

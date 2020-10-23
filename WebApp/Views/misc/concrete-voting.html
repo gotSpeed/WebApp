@@ -1,0 +1,72 @@
+{% extends 'concrete-publication-template.html' %}
+{% load static %}
+
+
+{% block style %}
+    <link rel="stylesheet" href="{% static '/css/concrete-voting.css' %}">
+
+	{% for option in optionsVerbose %}
+		<style media="screen">
+			#success__bar{{ option.0 }} {
+				width: {{ option.3 }}%;
+			}
+		</style>
+	{% endfor %}
+
+{% endblock %}
+
+{% block guestView %}
+    <div class="concrete__publication-guest__block">
+        <h1>{{ publication.name }}</h1>
+        <hr>
+        Author:<span>{{ publication.author }}</span>
+        <br>
+        Email:<span>{{ publication.author.email }}</span>
+        <br>
+        People signed:<span>{{ publication.peopleVoted }}</span>
+        <br>
+        Creation date:<span>{{ publication.dateCreated }}</span>
+        <hr>
+        <div class="concrete__publication-guest__block-description">
+            {{ publication.description }}
+        </div>
+    </div>
+
+    {% if not signed %}
+        <form class="sign__publication" method="post">
+            {% csrf_token %}
+            <div class="sign__publication-inputs__block">
+
+                {% for option in optionsVerbose %}
+                    <div class="sign__publication-inputs__block-concrete">
+                        <input name="option" type="checkbox" value="{{ option.2.id }}">{{ option.2 }}</input>
+                    </div>
+                {% endfor %}
+
+                <button type="submit">Vote</button>
+            </div>
+        </form>
+    {% else %}
+        <p>You have already voted:</p>
+
+        {% for option in optionsVerbose %}
+            <div class="sign__publication-inputs__block-concrete voted">
+
+                {% if option.1 %}
+                    <span class="voted__for__block highlight">{{ option.2 }} ({{ option.2.amountOfVoters }} vts. and yours)</span>
+                {% else %}
+                    <span class="voted__for__block">{{ option.2 }} ({{ option.2.amountOfVoters }} vts.)</span>
+                {% endif %}
+
+                <div class="success__bar">
+                    <div class="success__bar-votes__number">{{ option.3 }}%</div>
+                    <div class="success__bar-progress">
+                        <div id="success__bar{{ option.0 }}" class="success__bar-progress-line"></div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    {% endif %}
+	
+{% endblock %}

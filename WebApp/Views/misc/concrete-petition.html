@@ -1,0 +1,67 @@
+{% extends 'concrete-publication-template.html' %}
+
+
+{% block style %}
+	<style media="screen">
+		#success__bar1 {
+			width: {{ next_goal_progress }}%;
+		}
+		#success__bar2  {
+			width: {{ total_goal_progress }}%;
+		}
+	</style>
+{% endblock %}
+
+{% block guestView %}
+	<div class="concrete__publication-guest__block">
+		<h1>{{ publication.name }}</h1>
+		<hr>
+		Author:<span>{{ publication.author }}</span>
+		<br>
+		Email:<span>{{ publication.author.email }}</span>
+		<br>
+		People signed:<span>{{ publication.peopleVoted }}</span>
+
+		<div class="info__lines-borders">
+			Next signs goal:<span>{{ publication.nextGoal }}</span>
+			<div class="success__bar">
+				<div class="success__bar-numbers">
+					<div>{{ publication.peopleVoted }}</div>
+					<div>{{ publication.nextGoal }}</div>
+				</div>
+				<div class="success__bar-progress">
+					<div id="success__bar1" class="success__bar-progress-line"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="info__lines-borders">
+			Total signs goal:<span>{{ publication.totalGoal }}</span>
+			<div class="success__bar">
+				<div class="success__bar-numbers">
+					<div>{{ publication.peopleVoted }}</div>
+					<div>{{ publication.totalGoal }}</div>
+				</div>
+				<div class="success__bar-progress">
+					<div id="success__bar2" class="success__bar-progress-line"></div>
+				</div>
+			</div>
+		</div>
+
+		Creation date:<span>{{ publication.dateCreated }}</span>
+		<hr>
+		<div class="concrete__publication-guest__block-description">
+			{{ publication.description }}
+		</div>
+	</div>
+
+	{% if not signed %}
+		<form class="sign__publication" method="post">
+			{% csrf_token %}
+			<button type="submit">Put your sign</button>
+		</form>
+	{% else %}
+		<p><i class="fas fa-check"></i>You have already signed this petition</p>
+	{% endif %}
+
+{% endblock %}

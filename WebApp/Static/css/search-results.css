@@ -1,0 +1,72 @@
+body {
+	margin: 0;
+	padding: 0;
+
+	font-family: 'Poppins', sans-serif;
+}
+
+h1 {
+	color: #354a5f;
+}
+
+hr {
+	background-color: #354a5f;
+}
+
+/* Header for sign up page */
+.header {
+	margin: 0;
+	padding: 30px 0;
+
+	background-color: #354a5f;
+}
+
+
+.btn-go__back  {
+	display: block;
+	padding-left: 50px;
+
+	color: white;
+	text-decoration: none;
+	font-size: 20px;
+
+	transition: color 0.2s linear 0.2s;
+}
+
+.btn-go__back:hover {
+	color: #e44a4a;
+}
+
+.fa-arrow-left {
+	display: inline-block;
+	margin-right: 15px;
+}
+
+/* Publications */
+.publications {
+	margin: 0;
+	padding: 0;
+
+	background-color: white;
+}
+
+.publications__content {
+	margin: 0;
+	padding: 15px 20px;
+
+	color: #354a5f;
+	border: 2px solid #EDEDED;
+	border-radius: 25px;
+	text-decoration: none;
+}
+
+.publications__content hr {
+	margin: 20px auto;
+	padding: 0;
+
+	width: 80%;
+	height: 2px;
+
+	text-decoration: none;
+	background-color: #354a5f;
+}

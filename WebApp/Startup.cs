@@ -1,39 +1,57 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+
+using WebApp.DataAccess.DbContexts;
 
 
 namespace WebApp {
 	public class Startup {
-		// This method gets called by the runtime. Use this method to add services to the container.
-		// For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
-		public void ConfigureServices(IServiceCollection services) {
-			services.AddMvc((MvcOptions options) => options.EnableEndpointRouting = false);
+
+		private readonly IConfiguration _appConfig;
+
+		public Startup(IConfiguration config) {
+			_appConfig = config;
 		}
 
-		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+		public void ConfigureServices(IServiceCollection services) {
+			services.AddDbContextPool<PostgresDbContext>(
+				options => options.UseNpgsql(_appConfig.GetConnectionString("Postgres"),
+											 npgqslOptions => npgqslOptions.MigrationsAssembly("WebApp"))
+								  .EnableSensitiveDataLogging()
+			);
+
+			services.AddIdentity<IdentityUser, IdentityRole>()
+					.AddEntityFrameworkStores<PostgresDbContext>();
+
+			services.AddControllersWithViews();
+		}
+
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
 			if (env.IsDevelopment()) {
 				app.UseDeveloperExceptionPage();
 			}
 
-			//app.UseRouting();
-			app.UseMvcWithDefaultRoute();
-			//app.UseEndpoints(endpoints =>
-			//{
-			//	endpoints.MapGet("/", async context =>
-			//	{
-			//		await context.Response.WriteAsync("Hello World!");
-			//	});
-			//});
+			app.UseStaticFiles();
+			app.UseAuthentication();
+			app.UseRouting();
+
+			app.UseEndpoints(endpoints => {
+				endpoints.MapControllerRoute(
+					name: "controller",
+					pattern: "~/{controller}"
+				);
+				endpoints.MapControllerRoute(
+					name: "action",
+					pattern: "~/{controller}/{action}"
+				);
+			});
 		}
+
 	}
+
 }
