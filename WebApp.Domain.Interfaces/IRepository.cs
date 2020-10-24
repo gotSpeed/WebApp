@@ -1,22 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using WebApp.Domain.Core;
-
 
 namespace WebApp.Domain.Interfaces {
 
 	public interface IRepository<TDomainObject> : IDisposable {
 
-		TDomainObject Get();
+		TDomainObject Get(object keyValues);
 
 		IEnumerable<TDomainObject> GetAll();
 
-		void Create(Post post);
+		void Create(TDomainObject newInstance);
 
-		void Delete(ushort id);
+		void Delete(object keyValues);
 
-		void Update(ushort id, Post newData);
+		void Update(object keyValues, TDomainObject newData);
 
 	}
 

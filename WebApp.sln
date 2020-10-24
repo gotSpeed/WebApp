@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp.Domain.Interfaces", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp.DataAccess", "WebApp.DataAccess\WebApp.DataAccess.csproj", "{C9AA1290-6D11-4B74-98F7-8945B09B45DB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp.DataAccess.Misc", "WebApp.DataAccess.Misc\WebApp.DataAccess.Misc.csproj", "{891D0162-09C8-4FE1-88CC-C3FBD76FF88B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{C9AA1290-6D11-4B74-98F7-8945B09B45DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9AA1290-6D11-4B74-98F7-8945B09B45DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9AA1290-6D11-4B74-98F7-8945B09B45DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{891D0162-09C8-4FE1-88CC-C3FBD76FF88B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{891D0162-09C8-4FE1-88CC-C3FBD76FF88B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{891D0162-09C8-4FE1-88CC-C3FBD76FF88B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{891D0162-09C8-4FE1-88CC-C3FBD76FF88B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using WebApp.Domain.Core;
 
 
-namespace WebApp.DataAccess.DbContexts.Extensions {
+namespace WebApp.DataAccess.Misc.Extensions {
 
 	public static class ModelBuilderExtension {
 

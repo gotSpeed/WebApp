@@ -4,6 +4,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Remove="Static\css\auth-template.css" />
     <None Remove="Static\css\concrete-publication-template.css" />
@@ -43,6 +47,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WebApp.DataAccess\WebApp.DataAccess.csproj" />
+    <ProjectReference Include="..\WebApp.Domain.Interfaces\WebApp.Domain.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>

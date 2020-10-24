@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 using WebApp.DataAccess.DbContexts;
+using WebApp.DataAccess.Repositories;
+using WebApp.Domain.Interfaces;
 
 
 namespace WebApp {
@@ -27,6 +29,9 @@ namespace WebApp {
 
 			services.AddIdentity<IdentityUser, IdentityRole>()
 					.AddEntityFrameworkStores<PostgresDbContext>();
+
+			services.AddSingleton<CustomDbContext, PostgresDbContext>()
+			        .AddSingleton<IPollRepository, PollRepository>();
 
 			services.AddControllersWithViews();
 		}
