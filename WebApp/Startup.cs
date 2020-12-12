@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using WebApp.DataAccess.DbContexts;
 using WebApp.DataAccess.Repositories;
 using WebApp.Domain.Interfaces;
+using WebApp.Domain.Core;
 
 
 namespace WebApp {
@@ -27,13 +28,22 @@ namespace WebApp {
 								  .EnableSensitiveDataLogging()
 			);
 
-			services.AddIdentity<IdentityUser, IdentityRole>()
+			services.AddIdentity<User, IdentityRole<int>>()
 					.AddEntityFrameworkStores<PostgresDbContext>();
 
 			services.AddSingleton<CustomDbContext, PostgresDbContext>()
-			        .AddSingleton<IPollRepository, PollRepository>();
+					.AddSingleton<IPollRepository, PollRepository>()
+					.AddSingleton<IPetitionRepository, PetitionRepository>()
+					.AddSingleton<IUserRepository, UserRepository>();
 
 			services.AddControllersWithViews();
+
+			services.AddAuthentication()
+					.AddGoogle(options => {
+						options.ClientId = "519521638508-rclrukh52njcn09pqqa4ase6r0elhp9k.apps.googleusercontent.com";
+						options.ClientSecret = "COOtYOY701tJRvNO-O4QWfnW";
+						options.CallbackPath = "/SignIn-google";
+					});
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
@@ -42,17 +52,24 @@ namespace WebApp {
 			}
 
 			app.UseStaticFiles();
-			app.UseAuthentication();
+
 			app.UseRouting();
+
+			app.UseAuthentication();
+			app.UseAuthorization();
 
 			app.UseEndpoints(endpoints => {
 				endpoints.MapControllerRoute(
-					name: "controller",
-					pattern: "~/{controller}"
+					name: "id",
+					pattern: "~/{controller}/{action}/{id}/"
 				);
 				endpoints.MapControllerRoute(
 					name: "action",
-					pattern: "~/{controller}/{action}"
+					pattern: "~/{controller}/{action}/"
+				);
+				endpoints.MapControllerRoute(
+					name: "controller",
+					pattern: "~/{controller}/"
 				);
 			});
 		}

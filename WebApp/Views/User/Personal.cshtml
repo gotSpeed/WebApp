@@ -1,0 +1,156 @@
+﻿@using WebApp.Domain.Core
+
+
+@model User
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/authentication.css">
+    <link rel="stylesheet" href="~/css/user.css">
+    <script src="https://kit.fontawesome.com/7bbe8a264e.js" crossorigin="anonymous"></script>
+    <title>User profile</title>
+</head>
+
+<body>
+
+    <div class="header">
+        <a class="btn-go__back" href="#"><i class="fas fa-arrow-left"></i>To main page</a>
+    </div>
+
+    <section class="user__profile">
+        <!-- Profile customization -->
+        <div class="bordered__container">
+            <h1>Your profile info</h1>
+            <ul class="user__info">
+                <li>
+                    <div class="info__list-item">
+                        <p class="info__list-item-name">Username:<span></span></p>
+                        <form class="info__list-item-form" method="post">
+                            <div class="input__decoration">
+                                <input type="text" name="username_form" placeholder="You can change your username here...">
+                            </div>
+                            <button type="submit" name="accept"><i class="fas fa-check"></i></button>
+                            <button type="" name="cancel"><i class="fas fa-times"></i></button>
+                        </form>
+                    </div>
+                </li>
+                <li>
+                    <div class="info__list-item">
+                        <p class="info__list-item-name">Email:<span>@Model.UserName</span></p>
+                        <form class="info__list-item-form" method="post">
+                            <div class="input__decoration">
+                                <input type="text" name="email_form" placeholder="You can change your email here...">
+                            </div>
+                            <button type="submit" name="accept"><i class="fas fa-check"></i></button>
+                            <button type="reset" name="cancel"><i class="fas fa-times"></i></button>
+                        </form>
+                    </div>
+                </li>
+                <li>
+                    <div class="info__list-item">
+                        <p class="info__list-item-name">First name:<span>@Model.FirstName</span></p>
+                        <form class="info__list-item-form" method="post">
+                            <div class="input__decoration">
+                                <input type="text" name="first_name_form" placeholder="You can change your first name here...">
+                            </div>
+                            <button type="submit" name="accept"><i class="fas fa-check"></i></button>
+                            <button type="" name="cancel"><i class="fas fa-times"></i></button>
+                        </form>
+                    </div>
+                </li>
+                <li>
+                    <div class="info__list-item">
+                        <p class="info__list-item-name">Last name:<span>@Model.SecondName</span></p>
+                        <form class="info__list-item-form" method="post">
+                            <div class="input__decoration">
+                                <input type="text" name="last_name_form" placeholder="You can change your last name here...">
+                            </div>
+                            <button type="submit" name="accept"><i class="fas fa-check"></i></button>
+                            <button type="" name="cancel"><i class="fas fa-times"></i></button>
+                        </form>
+                    </div>
+                </li>
+                <li>
+                    <div class="info__list-item">
+                        <p class="info__list-item-name">Password:</p>
+                        <form class="info__list-item-form" method="post">
+                            <div class="input__decoration">
+                                <input type="text" name="password_form" placeholder="You can change your password here...">
+                            </div>
+                            <button type="submit" name="accept"><i class="fas fa-check"></i></button>
+                            <button type="" name="cancel"><i class="fas fa-times"></i></button>
+                        </form>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <hr>
+
+    <section class="user__content">
+        <!-- Publications management -->
+        <div class="bordered__container">
+            <h1>Your votings and petitions</h1>
+            <div class="create__content__buttons">
+                <a asp-controller="Publications" asp-action="CreatePoll">Create poll</a>
+                <a asp-controller="Publications" asp-action="CreatePetition">Create petition</a>
+            </div>
+
+            <div class="user__content__block">
+                @foreach (Poll poll in ViewBag.Polls) {
+                    <a class="publications__content" asp-controller="Publications" asp-action="Poll" asp-route-id="poll.Id">
+                        <div class="publications__content-name">
+                            @poll.Header
+                        </div>
+                        <hr>
+                        @if (ViewBag.UserName != null @*&& ViewBag.UserName == petition?.Author.UserName*@) {
+                            @:Author:<span class="highlight">@poll.Author?.UserName</span>
+                        }
+                        else {
+                            @:Author:<span>@(poll.Author?.UserName)</span>
+                        }
+                        <br>
+                        People signed:<span>@poll.VotersAmount</span>
+                        <br>
+                        <hr>
+                        <div class="publications__content-descriprion">
+                            @poll.ShortDescription
+                        </div>
+                    </a>
+                }
+                @foreach (Petition petition in ViewBag.Petitions) {
+                    <a class="publications__content" asp-controller="Publications" asp-action="Petition"
+                       asp-route-id="petition.Id">
+
+                        <div class="publications__content-name">
+                            @petition.Header
+                        </div>
+                        <hr>
+                        @if (ViewBag.UserName != null @*&& ViewBag.UserName == petition?.Author.UserName*@) {
+                            @:Author:<span class="highlight">@petition.Author?.UserName</span>
+                        }
+                        else {
+                            @:Author:<span>@petition.Author?.UserName</span>
+                        }
+                        <br>
+                        People signed:<span>@petition.VotersAmount</span>
+                        <br>
+                        <hr>
+                        <div class="publications__content-descriprion">
+                            @petition.ShortDescription
+                        </div>
+                    </a>
+                }
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>

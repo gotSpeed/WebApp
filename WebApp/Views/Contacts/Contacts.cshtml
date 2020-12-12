@@ -1,0 +1,52 @@
+﻿@section Links {
+    <link rel="stylesheet" href="~/css/contacts.css">
+}
+
+
+@section Styles {
+    <style media="screen">
+        #contacts_pg::after {
+            opacity: 1;
+        }
+    </style>
+}
+
+
+@* Body start *@
+<section class="section-contacts">
+    <div class="bordered__container">
+        <div class="contacts">
+            <h1>You can contact us by:</h1>
+            <ul>
+                <li>
+                    <span class="contact__by-name">Email:</span>
+                    <a class="contact__by-content" href="#">admin@gmail.com</a>
+                </li>
+                <li>
+                    <span class="contact__by-name">Phone:</span>
+                    <a class="contact__by-content" href="#">+555(55)-111-22-33</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section class="section-message">
+    <div class="bordered__container">
+        <div class="message">
+            <h1>Or you can just leave a message</h1>
+            <div class="message__block">
+                <div class="message__block-wrap">
+                    <img class="message__block-avatar" src="~/Images/no-avatar.png" alt="no-avatar.png">
+                    <form class="message__block-form" method="post">
+                        <div class="message__block-form-message__decoration">
+                            <textarea name="message" class="message__block-form-message" rows="4" cols="98" placeholder="Enter your text here..."></textarea>
+                        </div>
+                        <button class="message__block-form-btn" type="submit">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@* Body end *@

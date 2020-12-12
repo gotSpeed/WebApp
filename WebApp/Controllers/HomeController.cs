@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 using WebApp.Domain.Interfaces;
 
@@ -7,20 +8,14 @@ namespace WebApp.Controllers {
 
 	public class HomeController : Controller {
 
-		private readonly IPollRepository _pollRepository;
-		//private readonly IPetitionRepository _petitionRepository;
-		//private readonly IUserRepository _userRepository;
-		//private readonly IVotingOptionRepository _voptionRepository;
+		protected readonly IPollRepository _pollRepository;
+		protected readonly IPetitionRepository _petitionRepository;
 
-		public HomeController(IPollRepository pollRepository
-							  /*IPetitionRepository petitionRepository,
-							  IUserRepository userRepository,
-							  IVotingOptionRepository voptionRepository*/) {
+		public HomeController(IPollRepository pollRepository,
+								IPetitionRepository petitionRepository) : base() {
 
 			_pollRepository = pollRepository;
-			//_petitionRepository = petitionRepository;
-			//_userRepository = userRepository;
-			//_voptionRepository = voptionRepository;
+			_petitionRepository = petitionRepository;
 		}
 
 		[Route("~/")]
@@ -30,6 +25,11 @@ namespace WebApp.Controllers {
 
 		[Route("~/Home")]
 		public IActionResult Home() {
+			ViewBag.PopularPolls = _pollRepository.GetMostPopular();
+			ViewBag.PopularPetitions = _petitionRepository.GetMostPopular();
+
+			ViewBag.UserName = User.Identity.Name;
+
 			return View();
 		}
 

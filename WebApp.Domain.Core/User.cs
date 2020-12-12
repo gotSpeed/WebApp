@@ -1,16 +1,17 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 
 namespace WebApp.Domain.Core {
 
-	public class User : IdentityUser<uint> {
+	public class User : IdentityUser<int> {
 
-		[Key]
-		public override uint Id { get; set; }
-		public List<Poll> UserPolls { get; set; }
-		public List<Petition> UserPetitions { get; set; }
+		public string FirstName { get; set; }
+		public string SecondName { get; set; }
+
+
+		public virtual ICollection<Poll>		UserPolls { get; set; }
+		public virtual ICollection<Petition>	UserPetitions { get; set; }
 
 	}
 

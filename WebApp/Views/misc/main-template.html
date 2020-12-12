@@ -1,0 +1,52 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static '/css/main-template.css' %}">
+
+    {% block css_import %}{% endblock %}
+    {% block current_link_style %}{% endblock %}
+
+    <title>Voting service</title>
+</head>
+
+<body>
+<header>
+    <div class="header-logo">
+        <img src="{% static '/images/site-logo.png' %}" alt="Logo">
+    </div>
+
+    <ul class="nav-bar">
+        <li class="nav-bar__item"><a id="main_pg" href="{% url 'home_page' %}">Main page</a></li>
+        <li class="nav-bar__item"><a id="voting_pg" href="{% url 'publications_page' %}">Available voting</a></li>
+        <li class="nav-bar__item"><a id="contacts_pg" href="{% url 'contacts_page' %}">Contacts</a></li>
+    </ul>
+
+    <div class="empty"></div>
+
+    <div class="search-bar">
+        <form class="search-bar__decoration" method="post">
+			{% csrf_token %}
+            <input type="text" name="search_query" placeholder="Search...">
+        </form>
+    </div>
+
+    <div class="login-bar">
+        {% if request.user.is_authenticated %}
+            <a id="signed-in__user__name"
+               href="{% url 'user_page' request.user.id %}">{{ request.user.username }}</a>
+            <span class="login-bar__delimiter">|</span>
+            <a href="{% url 'sign-out' %}">Sign out</a>
+        {% else %}
+            <a href="{% url 'sign-in_page' pr_pg %}">Sign in</a>
+        {% endif %}
+    </div>
+</header>
+
+{% block content %}{% endblock %}
+
+</body>
+</html>

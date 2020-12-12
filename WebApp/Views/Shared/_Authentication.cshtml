@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/authentication.css">
+    <script src="https://kit.fontawesome.com/7bbe8a264e.js" crossorigin="anonymous"></script>
+
+    @RenderSectionAsync("Links", required: false).Result
+    @RenderSectionAsync("ScriptsHighPriority", required: false).Result
+    @RenderSection("Styles", required: false)
+
+    <title>Authentication</title>
+</head>
+
+<body>
+
+    <div class="header">
+        <a class="btn-go__back" href="#"><i class="fas fa-arrow-left"></i>Back</a>
+    </div>
+
+    <section class="sign-up__block">
+
+        @RenderBody()
+
+    </section>
+
+    @RenderSectionAsync("ScriptsLowPriority", required: false).Result
+
+</body>
+
+</html>

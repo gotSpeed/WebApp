@@ -5,8 +5,8 @@ namespace WebApp.Domain.Core {
 
 	public class Poll : Post {
 
-		public bool IsAnonymous { get; set; }
-		public List<uint> OptionsId { get; set; }
+		public bool									IsAnonymous { get; set; }
+		public virtual ICollection<VotingOption>	Options { get; set; }
 
 	}
 

@@ -4,7 +4,7 @@
 
 <head>
     <meta name="viewport" content="width=device-width" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap" rel="stylesheet">
+    @*<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap" rel="stylesheet">*@
     <link rel="stylesheet" href="~/css/main-template.css">
 
     @RenderSectionAsync("Links", required: false).Result
@@ -22,9 +22,15 @@
         </div>
 
         <ul class="nav-bar">
-            <li class="nav-bar__item"><a id="main_pg" href="#">Main page</a></li>
-            <li class="nav-bar__item"><a id="voting_pg" href="#">Available voting</a></li>
-            <li class="nav-bar__item"><a id="contacts_pg" href="#">Contacts</a></li>
+            <li class="nav-bar__item">
+                <a id="main_pg" asp-controller="Home" asp-action="Empty">Main page</a>
+            </li>
+            <li class="nav-bar__item">
+                <a id="voting_pg" asp-controller="Publications" asp-action="Publications">Publication</a>
+            </li>
+            <li class="nav-bar__item">
+                <a id="contacts_pg" asp-controller="Contacts" asp-action="Contacts">Contacts</a>
+            </li>
         </ul>
 
         <div class="empty"></div>
@@ -36,11 +42,15 @@
         </div>
 
         <div class="login-bar">
-            @*<a id="signed-in__user__name"
-               href="{% url 'user_page' request.user.id %}">{{ request.user.username }}</a>
-            <span class="login-bar__delimiter">|</span>
-            <a href="{% url 'sign-out' %}">Sign out</a>*@
-            <a href="#">Sign in</a>
+            @if (User.Identity.IsAuthenticated) {
+                <a id="signed-in__user__name" asp-controller="User" asp-action="Personal">@User.Identity.Name</a>
+                <span class="login-bar__delimiter">|</span>
+                <a asp-controller="Authentication" asp-action="SignOut">Sign out</a>
+            }
+            else {
+                <a asp-controller="Authentication" asp-action="SignIn">Sign in</a>
+            }
+
         </div>
     </header>
 

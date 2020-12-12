@@ -1,0 +1,61 @@
+﻿@{
+    Layout = "";
+}
+
+
+@model PetitionViewModel
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/authentication.css">
+    <link rel="stylesheet" href="~/css/create-petition.css">
+    <script src="https://kit.fontawesome.com/7bbe8a264e.js" crossorigin="anonymous"></script>
+
+    <title>Create petition</title>
+</head>
+
+<body>
+
+    <div class="header">
+        <a class="btn-go__back" href="#"><i class="fas fa-arrow-left"></i>To profile page</a>
+    </div>
+    <div class="bordered__container">
+        <div class="create__content-block">
+            <form class="create__content-form" method="post">
+                <h1>New petition</h1>
+
+                <label asp-for="Heading"></label>
+                <div class="input__decoration">
+                    <input type="text" asp-for="Heading" maxlength="200" placeholder="Petition">
+                </div>
+
+                <label asp-for="TotalGoal">Total votes goal:</label>
+                <div class="input__decoration">
+                    <input type="number" asp-for="TotalGoal" placeholder="5000">
+                </div>
+
+                <label asp-for="NextGoal">Start votes goal (unnecessary):</label>
+                <div class="input__decoration">
+                    <input type="number" asp-for="NextGoal" value="200">
+                </div>
+
+                <label asp-for="Description">Description:</label>
+                <div class="input__decoration textarea__decoration">
+                    <textarea asp-for="Description" rows="8" placeholder="My petition..." maxlength="1000"></textarea>
+                </div>
+
+                <div asp-validation-summary="All"></div>
+
+                <button class="create__content-form-btn" type="submit">Publish</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>

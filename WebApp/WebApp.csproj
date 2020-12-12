@@ -9,40 +9,50 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Static\css\auth-template.css" />
+    <Content Remove="Views\Home.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Static\css\authentication.css" />
     <None Remove="Static\css\concrete-publication-template.css" />
     <None Remove="Static\css\concrete-voting.css" />
     <None Remove="Static\css\contacts.css" />
+    <None Remove="Static\css\create-petition.css" />
     <None Remove="Static\css\home.css" />
     <None Remove="Static\css\main-template.css" />
-    <None Remove="Static\css\petition-creation.css" />
     <None Remove="Static\css\publications.css" />
     <None Remove="Static\css\search-results.css" />
     <None Remove="Static\css\user.css" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Static\css\auth-template.css" />
+    <Content Include="Static\css\authentication.css" />
     <Content Include="Static\css\concrete-publication-template.css" />
     <Content Include="Static\css\concrete-voting.css" />
     <Content Include="Static\css\contacts.css" />
     <Content Include="Static\css\home.css" />
     <Content Include="Static\css\main-template.css" />
-    <Content Include="Static\css\petition-creation.css" />
+    <Content Include="Static\css\create-petition.css" />
     <Content Include="Static\css\publications.css" />
     <Content Include="Static\css\search-results.css" />
     <Content Include="Static\css\user.css" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.9" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.9" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.9">
+    <Page Include="Views\Home\Home.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.1.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="5.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.4" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>

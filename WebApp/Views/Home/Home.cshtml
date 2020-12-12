@@ -14,82 +14,75 @@
 
 
 @* Body start *@
-<body>
-    <section class="wallpaper">
-        <div class="bordered__container">
-            <h1 class="wallpaper__heading">Create your own voting</h1>
-            <p class="wallpaper__description">Create your own voting, poll or petition and manage it through your profile page.</p>
-            <div class="wallpaper__scroller">
-                <img class="wallpaper__image" src="~/images/voting.jpg" alt="">
-                <form method="post">
-                    <button name="btn-petition" class="btn-wallpaper" type="button">Create petition</button>
-                    <button name="btn-voting" class="btn-wallpaper" type="button">Create voting</button>
-                </form>
-            </div>
-        </div>
-    </section>
+@using WebApp.Domain.Core
 
-    <section class="popular">
-        <div class="bordered__container">
-            <h1 class="popular__heading">Most popular among users</h1>
-            <p class="popular__description">The votings and petitions, that have the most of signs</p>
-            <div class="publications-grid">
-                {% for publication in popular_petitions %}
-                <a class="publications__content" href="{% url 'concrete_petition_page' pr_pg publication.id %}">
+<section class="wallpaper">
+    <div class="bordered__container">
+        <h1 class="wallpaper__heading">Create your own voting</h1>
+        <p class="wallpaper__description">Create your own voting, poll or petition and manage it through your profile page.</p>
+        <div class="wallpaper__scroller">
+            <img class="wallpaper__image" src="~/Images/voting.jpg" alt="">
+            <form method="post">
+                <button name="btn-petition" class="btn-wallpaper" type="button">Create petition</button>
+                <button name="btn-voting" class="btn-wallpaper" type="button">Create voting</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section class="popular">
+    <div class="bordered__container">
+        <h1 class="popular__heading">Most popular among users</h1>
+        <p class="popular__description">The votings and petitions, that have the most of signs</p>
+        <div class="publications-grid">
+            @foreach ( Petition petition in ViewBag.PopularPetitions ) {
+                <a class="publications__content" asp-controller="Publications" asp-action="Petition"
+                   asp-route-id="petition.Id">
+
                     <div class="publications__content-name">
-                        {{ publication.name }}
+                        @petition.Header
                     </div>
                     <hr>
-
-                    {% if user_id == publication.author.id %}
-                    Author:<span class="highlight">{{ publication.author }}</span>
-                    {% else %}
-                    Author:<span>{{ publication.author }}</span>
-                    {% endif %}
-
+                    @if ( ViewBag.UserName != null @*&& ViewBag.UserName == petition?.Author.UserName*@ ) {
+                        @:Author:<span class="highlight">@petition.Author?.UserName</span>
+                    }
+                    else {
+                        @:Author:<span>@petition.Author?.UserName</span>
+                    }
                     <br>
-
-                    {% if publication.peopleVoted >= publication.totalGoal %}
-                    People signed:<span class="highlight">{{ publication.peopleVoted }}</span>
-                    {% else %}
-                    People signed:<span>{{ publication.peopleVoted }}</span>
-                    {% endif %}
-
-                    <br>
-                    Next goal:<span>{{ publication.nextGoal }}</span>
-                    <br>
-                    Total goal:<span>{{ publication.totalGoal }}</span>
+                    People signed:<span>@petition.VotersAmount</span>
                     <br>
                     <hr>
                     <div class="publications__content-descriprion">
-                        {{ publication.shortDescription }}
+                        @petition.ShortDescription
                     </div>
                 </a>
-                {% endfor %}
-            </div>
-            <div class="publications-grid">
-                {% for publication in popular_votings %}
-                <a class="publications__content" href="{% url 'concrete_voting_page' pr_pg publication.id %}">
+            }
+        </div>
+        <hr />
+        <div class="publications-grid">
+            @foreach ( Poll poll in ViewBag.PopularPolls ) {
+                <a class="publications__content" asp-controller="Publications" asp-action="Poll" asp-route-id="poll.Id">
                     <div class="publications__content-name">
-                        {{ publication.name }}
+                        @poll.Header
                     </div>
                     <hr>
-                    {% if user_id == publication.author.id %}
-                    Author:<span class="highlight">{{ publication.author }}</span>
-                    {% else %}
-                    Author:<span>{{ publication.author }}</span>
-                    {% endif %}
+                    @if ( ViewBag.UserName != null @*&& ViewBag.UserName == poll.Author.UserName*@ ) {
+                        @:Author:<span class="highlight">@poll.Author?.UserName</span>
+                    }
+                    else {
+                        @:Author:<span>@(poll.Author?.UserName)</span>
+                    }
                     <br>
-                    People signed:<span>{{ publication.peopleVoted }}</span>
+                    People signed:<span>@poll.VotersAmount</span>
                     <br>
                     <hr>
                     <div class="publications__content-descriprion">
-                        {{ publication.shortDescription }}
+                        @poll.ShortDescription
                     </div>
                 </a>
-                {% endfor %}
-            </div>
+            }
         </div>
-    </section>
-</body>
+    </div>
+</section>
 @* Body end *@
