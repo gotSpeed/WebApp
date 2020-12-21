@@ -19,9 +19,9 @@ namespace WebApp.DataAccess.Repositories {
 			_context = context;
 		}
 
-		public Poll Get(object keyValues) {
-			return	_context.Polls.Find(keyValues) ??
-					throw new RowNotFoundException($"Cannot extract data: no row with PK = {keyValues}");
+		public Poll Get(params object[] pkeys) {
+			return	_context.Polls.Find(pkeys) ??
+					throw new RowNotFoundException($"Cannot extract data: no row with pkeys = {pkeys}");
 		}
 
 		public IEnumerable<Poll> GetMostPopular() {
@@ -51,12 +51,12 @@ namespace WebApp.DataAccess.Repositories {
 			}
 		}
 
-		public void Delete(object keyValues) {
+		public void Delete(params object[] pkeys) {
 			Poll pollToDelete = null;
 
 			try {
-				pollToDelete =	_context.Polls.Find(keyValues) ??
-								throw new RowNotFoundException($"Cannot delete data: no row with PK = {keyValues}");
+				pollToDelete =	_context.Polls.Find(pkeys) ??
+								throw new RowNotFoundException($"Cannot delete data: no row with pkeys = {pkeys}");
 
 				_context.Polls.Remove(pollToDelete);
 				_context.SaveChanges();
@@ -70,10 +70,10 @@ namespace WebApp.DataAccess.Repositories {
 			}
 		}
 
-		public void Update(object keyValues, Poll newData) {
+		public void Update(Poll newData, params object[] pkeys) {
 			try {
-				Poll updatedInstance =	_context.Polls.Find(keyValues) ??
-										throw new RowNotFoundException($"Cannot update data: no row with PK = {keyValues}");
+				Poll updatedInstance =	_context.Polls.Find(pkeys) ??
+										throw new RowNotFoundException($"Cannot update data: no row with pkeys = {pkeys}");
 
 				updatedInstance = newData;
 			}

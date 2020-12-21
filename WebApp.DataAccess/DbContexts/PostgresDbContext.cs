@@ -10,10 +10,6 @@ namespace WebApp.DataAccess.DbContexts {
 
 		public PostgresDbContext(DbContextOptions<PostgresDbContext> options) : base(options) { }
 
-		//protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-		//	optionsBuilder.UseLazyLoadingProxies();
-		//}
-
 		protected override void OnModelCreating(ModelBuilder modelBuilder) {
 			base.OnModelCreating(modelBuilder);
 

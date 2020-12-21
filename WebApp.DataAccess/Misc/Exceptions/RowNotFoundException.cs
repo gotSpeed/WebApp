@@ -3,12 +3,11 @@
 
 namespace WebApp.DataAccess.Misc.Exceptions {
 
-	public class RowNotFoundException : Exception {
+    public class RowNotFoundException : Exception {
 
-		public RowNotFoundException() : base() { }
+        public RowNotFoundException() : base() { }
+        public RowNotFoundException(string message) : base(message) { }
 
-		public RowNotFoundException(string message) : base(message) { }
-
-	}
+    }
 
 }

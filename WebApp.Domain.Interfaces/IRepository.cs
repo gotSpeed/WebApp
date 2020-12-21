@@ -6,15 +6,15 @@ namespace WebApp.Domain.Interfaces {
 
 	public interface IRepository<TDomainObject> : IDisposable {
 
-		TDomainObject Get(object keyValues);
+		TDomainObject Get(params object[] pkeys);
 
 		IEnumerable<TDomainObject> GetAll();
 
 		void Create(TDomainObject newInstance);
 
-		void Delete(object keyValues);
+		void Delete(params object[] pkeys);
 
-		void Update(object keyValues, TDomainObject newData);
+		void Update(TDomainObject newData, params object[] pkeys);
 
 	}
 

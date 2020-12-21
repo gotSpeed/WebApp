@@ -1,0 +1,78 @@
+@model Petition
+
+
+@section Styles {
+	<style media="screen">
+		#success__bar1 {
+			width: @ViewBag.NextGoalPercentage%;
+		}
+		#success__bar2 {
+			width: @ViewBag.TotalGoalPercentage%;
+		}
+	</style>
+}
+
+
+@* Body start *@
+<div class="concrete__publication-guest__block">
+	<h1>@Model.Header</h1>
+	<hr>
+	Author:<span>@(Model.AuthorId != null ? Model.Author?.UserName : "DELETED")</span>
+	<br>
+	Email:<span>@(Model.AuthorId != null ? Model.Author?.Email : "DELETED")</span>
+	<br>
+	People signed:<span>@Model.VotersAmount</span>
+
+	<div class="info__lines-borders">
+		Next signs goal:<span>@Model.NextGoal</span>
+		<div class="success__bar">
+			<div class="success__bar-numbers">
+				<div>@Model.VotersAmount</div>
+				<div>@Model.NextGoal</div>
+			</div>
+			<div class="success__bar-progress">
+				<div id="success__bar1" class="success__bar-progress-line"></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="info__lines-borders">
+		Total signs goal:<span>@Model.TotalGoal</span>
+		<div class="success__bar">
+			<div class="success__bar-numbers">
+				<div>@Model.VotersAmount</div>
+				<div>@Model.TotalGoal</div>
+			</div>
+			<div class="success__bar-progress">
+				<div id="success__bar2" class="success__bar-progress-line"></div>
+			</div>
+		</div>
+	</div>
+
+	Creation date:<span>@Model.PublicationDate</span>
+	Until<span>@Model.ExpirationDate</span>
+	<hr>
+	<div class="concrete__publication-guest__block-description">
+		@Model.Description
+	</div>
+</div>
+
+@if (!ViewBag.IsAlreadySigned) {
+	<form class="sign__publication" method="post" asp-controller="Publications" asp-action="PetitionVote"
+		  asp-route-postId="@Model.Id">
+		<button type="submit">Put your sign</button>
+	</form>
+}
+else {
+	<p><i class="fas fa-check"></i>You have already signed this petition</p>
+}
+
+@if (ViewBag.UserId != null && int.Parse(ViewBag.UserId) == Model.AuthorId) {
+	<div class="delete__section">
+		<form class="delete__button-form" method="post" asp-controller="Publications" asp-action="PetitionDelete"
+			  asp-route-postId="@Model.Id">
+			<button class="delete__button" type="submit" name="delete_pub">Delete publication</button>
+		</form>
+	</div>
+}
+@* Body end *@

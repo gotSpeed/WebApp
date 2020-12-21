@@ -1,0 +1,78 @@
+@model Poll
+
+
+@section Styles {
+	<link rel="stylesheet" href="~/css/poll.css">
+
+	@foreach (var option in ViewBag.Options) {
+		<style media="screen">
+			#success__bar{{ option.0 }} {
+				width: {{ option.3 }}%;
+			}
+		</style>
+	}
+}
+
+
+@* Body start *@
+<div class="concrete__publication-guest__block">
+	<h1>@Model.Header</h1>
+	<hr>
+	Author:<span>@Model.Author?.UserName</span>
+	<br>
+	Email:<span>@Model.Author?.Email</span>
+	<br>
+	People signed:<span>@Model.VotersAmount</span>
+	<br>
+	Creation date:<span>@Model.PublicationDate</span>
+	<hr>
+	<div class="concrete__publication-guest__block-description">
+		@Model.Description
+	</div>
+</div>
+
+    {% if not signed %}
+<form class="sign__publication" method="post">
+	{% csrf_token %}
+	<div class="sign__publication-inputs__block">
+
+		{% for option in optionsVerbose %}
+		<div class="sign__publication-inputs__block-concrete">
+			<input name="option" type="checkbox" value="{{ option.2.id }}">{{ option.2 }}</input>
+		</div>
+		{% endfor %}
+
+		<button type="submit">Vote</button>
+	</div>
+</form>
+    {% else %}
+<p>You have already voted:</p>
+
+        {% for option in optionsVerbose %}
+<div class="sign__publication-inputs__block-concrete voted">
+
+	{% if option.1 %}
+	<span class="voted__for__block highlight">{{ option.2 }} ({{ option.2.amountOfVoters }} vts. and yours)</span>
+	{% else %}
+	<span class="voted__for__block">{{ option.2 }} ({{ option.2.amountOfVoters }} vts.)</span>
+	{% endif %}
+
+	<div class="success__bar">
+		<div class="success__bar-votes__number">{{ option.3 }}%</div>
+		<div class="success__bar-progress">
+			<div id="success__bar{{ option.0 }}" class="success__bar-progress-line"></div>
+		</div>
+	</div>
+</div>
+        {% endfor %}
+
+    {% endif %}
+
+@if (ViewBag.UserId != null && ViewBag.UserId == Model.AuthorId) {
+	<div class="delete__section">
+		<form class="delete__button-form" method="post">
+			<button class="delete__button" type="submit" name="delete_pub">Delete publication</button>
+		</form>
+	</div>
+}
+@* Body end *@

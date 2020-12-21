@@ -19,9 +19,9 @@ namespace WebApp.DataAccess.Repositories {
 			_context = context;
 		}
 
-		public User Get(object keyValues) {
-			return _context.Users.Find(keyValues) ??
-					throw new RowNotFoundException($"Cannot extract data: no row with PK = {keyValues}");
+		public User Get(params object[] pkeys) {
+			return _context.Users.Find(pkeys) ??
+					throw new RowNotFoundException($"Cannot extract data: no row with PK = {pkeys}");
 		}
 
 		public User FindByEmail(string email) {
@@ -50,12 +50,12 @@ namespace WebApp.DataAccess.Repositories {
 			}
 		}
 
-		public void Delete(object keyValues) {
+		public void Delete(params object[] pkeys) {
 			User pollToDelete = null;
 
 			try {
-				pollToDelete = _context.Users.Find(keyValues) ??
-								throw new RowNotFoundException($"Cannot delete data: no row with PK = {keyValues}");
+				pollToDelete = _context.Users.Find(pkeys) ??
+								throw new RowNotFoundException($"Cannot delete data: no row with PK = {pkeys}");
 
 				_context.Users.Remove(pollToDelete);
 				_context.SaveChanges();
@@ -69,10 +69,10 @@ namespace WebApp.DataAccess.Repositories {
 			}
 		}
 
-		public void Update(object keyValues, User newData) {
+		public void Update(User newData, params object[] pkeys) {
 			try {
-				User updatedInstance =  _context.Users.Find(keyValues) ??
-										throw new RowNotFoundException($"Cannot update data: no row with PK = {keyValues}");
+				User updatedInstance =  _context.Users.Find(pkeys) ??
+										throw new RowNotFoundException($"Cannot update data: no row with PK = {pkeys}");
 
 				updatedInstance = newData;
 			}

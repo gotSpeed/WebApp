@@ -14,12 +14,12 @@
 
   <ItemGroup>
     <None Remove="Static\css\authentication.css" />
-    <None Remove="Static\css\concrete-publication-template.css" />
-    <None Remove="Static\css\concrete-voting.css" />
     <None Remove="Static\css\contacts.css" />
     <None Remove="Static\css\create-petition.css" />
     <None Remove="Static\css\home.css" />
     <None Remove="Static\css\main-template.css" />
+    <None Remove="Static\css\poll.css" />
+    <None Remove="Static\css\publication-template.css" />
     <None Remove="Static\css\publications.css" />
     <None Remove="Static\css\search-results.css" />
     <None Remove="Static\css\user.css" />
@@ -27,8 +27,8 @@
 
   <ItemGroup>
     <Content Include="Static\css\authentication.css" />
-    <Content Include="Static\css\concrete-publication-template.css" />
-    <Content Include="Static\css\concrete-voting.css" />
+    <Content Include="Static\css\publication-template.css" />
+    <Content Include="Static\css\poll.css" />
     <Content Include="Static\css\contacts.css" />
     <Content Include="Static\css\home.css" />
     <Content Include="Static\css\main-template.css" />
@@ -45,6 +45,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.1.10" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="5.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.1" />

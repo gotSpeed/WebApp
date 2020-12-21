@@ -1,14 +1,19 @@
-﻿@section Links {
-    <link rel="stylesheet" href="~/css/publications.css">
+﻿@{
+	Layout = "/Views/Shared/_Default.cshtml";
+}
+
+
+@section Links {
+	<link rel="stylesheet" href="~/css/publications.css">
 }
 
 
 @section Styles {
-    <style media="screen">
-        #voting_pg::after {
-            opacity: 1;
-        }
-    </style>
+	<style media="screen">
+		#voting_pg::after {
+			opacity: 1;
+		}
+	</style>
 }
 
 
@@ -16,67 +21,68 @@
 @using WebApp.Domain.Core
 
 <section class="publications">
-    <div class="bordered__container">
-        <h1>Petitions</h1>
-        <div class="publications-grid">
-            @foreach ( Petition petition in ViewBag.Petitions ) {
-                <a class="publications__content" asp-controller="Publications" asp-action="Petition"
-                   asp-route-id="petition.Id">
+	<div class="bordered__container">
+		<h1>Petitions</h1>
+		<div class="publications-grid">
+			@foreach (Petition petition in ViewBag.Petitions) {
+				<a class="publications__content" asp-controller="Publications" asp-action="Petition"
+				   asp-route-id="@petition.Id">
 
-                    <div class="publications__content-name">
-                        @petition.Header
-                    </div>
-                    <hr>
-                    Author:<span class="highlight">@petition.Author?.UserName</span>
-                    }
-                    else {
-                    Author:<span>@petition.Author?.UserName</span>
-                    }
-                    <br>
-                    @if ( petition.VotersAmount >= petition.TotalGoal ) {
-                        @:People signed:<span class="highlight">@petition.VotersAmount</span>
-                    }
-                    else {
-                        @:People signed:<span>@petition.VotersAmount</span>
-                    }
-                    <br>
-                    Next goal:<span>@petition.NextGoal</span>
-                    <br>
-                    Total goal:<span>@petition.TotalGoal</span>
-                    <br>
-                    <hr>
-                    <div class="publications__content-descriprion">
-                        @petition.ShortDescription
-                    </div>
-                </a>
-            }
-        </div>
-    </div>
-    <hr>
-    <div class="bordered__container">
-        <h1>Polls</h1>
-        <div class="publications-grid">
-            @foreach ( Poll poll in ViewBag.Polls ) {
-                <a class="publications__content" asp-controller="Publications" asp-action="Poll" asp-route-id="poll.Id">
-                    <div class="publications__content-name">
-                        @poll.Header
-                    </div>
-                    <hr>
-                    @if ( ViewBag.UserId != null && ViewBag.UserId == poll.AuthorId ) {
-                        @: Author:<span class="highlight">@(poll.Author?.UserName ?? "null")</span>
-                    }
-                    else {
-                        @:Author:<span>@(poll.Author?.UserName ?? "null")</span>
-                    }
-                    <br>
-                    People signed:<span>@poll.VotersAmount</span>
-                    <br>
-                    <hr>
-                    <div class="publications__content-descriprion">
-                        @poll.ShortDescription
-                    </div>
-                </a>}
-        </div>
-    </div>
+					<div class="publications__content-name">
+						@petition.Header
+					</div>
+					<hr>
+					@if (ViewBag.UserId != null && int.Parse(ViewBag.UserId) == petition.AuthorId) {
+						@:Author:<span class="highlight">@(petition.Author?.UserName ?? "DELETED")</span>
+					}
+					else {
+						@: Author:<span>@(petition.Author?.UserName ?? "DELETED")</span>
+					}
+					<br>
+					@if (petition.VotersAmount >= petition.TotalGoal) {
+						@:People signed:<span class="highlight">@petition.VotersAmount</span>
+					}
+					else {
+						@:People signed:<span>@petition.VotersAmount</span>
+					}
+					<br>
+					Next goal:<span>@petition.NextGoal</span>
+					<br>
+					Total goal:<span>@petition.TotalGoal</span>
+					<br>
+					<hr>
+					<div class="publications__content-descriprion">
+						@petition.ShortDescription
+					</div>
+				</a>
+			}
+		</div>
+	</div>
+	<hr>
+	<div class="bordered__container">
+		<h1>Polls</h1>
+		<div class="publications-grid">
+			@foreach (Poll poll in ViewBag.Polls) {
+				<a class="publications__content" asp-controller="Publications" asp-action="Poll" asp-route-id="@poll.Id">
+					<div class="publications__content-name">
+						@poll.Header
+					</div>
+					<hr>
+					@if (ViewBag.UserId != null && int.Parse(ViewBag.UserId) == poll.AuthorId) {
+						@: Author:<span class="highlight">@(poll.Author?.UserName ?? "DELETED")</span>
+					}
+					else {
+						@:Author:<span>@(poll.Author?.UserName ?? "DELETED")</span>
+					}
+					<br>
+					People signed:<span>@poll.VotersAmount</span>
+					<br>
+					<hr>
+					<div class="publications__content-descriprion">
+						@poll.ShortDescription
+					</div>
+				</a>}
+		</div>
+	</div>
 </section>
 @* Body end *@

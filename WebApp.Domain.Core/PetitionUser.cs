@@ -1,4 +1,7 @@
-﻿namespace WebApp.Domain.Core {
+﻿using System.ComponentModel.DataAnnotations;
+
+
+namespace WebApp.Domain.Core {
 
 	public class PetitionUser {
 

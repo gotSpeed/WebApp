@@ -9,10 +9,12 @@ namespace WebApp.DataAccess.DbContexts {
 
 	public class CustomDbContext : IdentityDbContext<User, IdentityRole<int>, int> {
 
-		public override DbSet<User>	Users { get; set; }
-		public DbSet<Poll>			Polls { get; set; }
-		public DbSet<Petition>		Petitions { get; set; }
-		public DbSet<VotingOption>	Options { get; set; }
+		public override DbSet<User>		Users { get; set; }
+		public DbSet<Poll>				Polls { get; set; }
+		public DbSet<Petition>			Petitions { get; set; }
+		public DbSet<VotingOption>		Options { get; set; }
+		public DbSet<PetitionUser>		PetitionUser { get; set; }
+		public DbSet<VotingOptionUser>	VotingOptionUser { get; set; }
 
 		public CustomDbContext(DbContextOptions<PostgresDbContext> options) : base(options) { }
 

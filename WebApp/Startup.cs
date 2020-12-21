@@ -22,6 +22,9 @@ namespace WebApp {
 		}
 
 		public void ConfigureServices(IServiceCollection services) {
+			services.AddRazorPages()
+					.AddRazorRuntimeCompilation();
+
 			services.AddDbContextPool<PostgresDbContext>(
 				options => options.UseNpgsql(_appConfig.GetConnectionString("Postgres"),
 											 npgqslOptions => npgqslOptions.MigrationsAssembly("WebApp"))
@@ -34,7 +37,8 @@ namespace WebApp {
 			services.AddSingleton<CustomDbContext, PostgresDbContext>()
 					.AddSingleton<IPollRepository, PollRepository>()
 					.AddSingleton<IPetitionRepository, PetitionRepository>()
-					.AddSingleton<IUserRepository, UserRepository>();
+					.AddSingleton<IUserRepository, UserRepository>()
+					.AddSingleton<IPetitionUserRepository, PetitionUserRepository>();
 
 			services.AddControllersWithViews();
 

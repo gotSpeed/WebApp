@@ -69,7 +69,8 @@ namespace WebApp.DataAccess.Misc.Extensions {
 				VotersAmount        = 15U,
 				ExpirationDate      = DateTime.UtcNow,
 				NextGoal            = 100U,
-				TotalGoal           = 20000U
+				TotalGoal           = 20000U,
+				IsClosed			= false
 			};
 			var poll = new {
 				Id                  = 1,

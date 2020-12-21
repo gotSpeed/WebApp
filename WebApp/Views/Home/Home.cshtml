@@ -37,7 +37,7 @@
         <div class="publications-grid">
             @foreach ( Petition petition in ViewBag.PopularPetitions ) {
                 <a class="publications__content" asp-controller="Publications" asp-action="Petition"
-                   asp-route-id="petition.Id">
+                   asp-route-id="@petition.Id">
 
                     <div class="publications__content-name">
                         @petition.Header
@@ -62,7 +62,7 @@
         <hr />
         <div class="publications-grid">
             @foreach ( Poll poll in ViewBag.PopularPolls ) {
-                <a class="publications__content" asp-controller="Publications" asp-action="Poll" asp-route-id="poll.Id">
+                <a class="publications__content" asp-controller="Publications" asp-action="Poll" asp-route-id="@poll.Id">
                     <div class="publications__content-name">
                         @poll.Header
                     </div>
